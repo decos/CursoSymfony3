@@ -1,0 +1,33 @@
+pruebas_index:
+    path: /pruebas/{lang}/{name}/{page}
+    defaults: { _controller: AppBundle:pruebas:index, name: Diego}
+    methods: [GET, POST]
+    requirements:
+        lang: es|en|fr
+        name: \w+
+        #name: "[a-zA-Z]*"
+        page: \d+
+        
+pruebas_create:
+    path: /pruebas/create
+    defaults: { _controller: AppBundle:pruebas:create }
+    
+pruebas_read:
+    path: /pruebas/read
+    defaults: { _controller: AppBundle:pruebas:read }
+    
+pruebas_update:
+    path: /pruebas/update/{id}/{titulo}/{descripcion}/{precio}
+    defaults: { _controller: AppBundle:pruebas:update }
+    
+pruebas_delete:
+    path: /pruebas/delete/{id}
+    defaults: { _controller: AppBundle:pruebas:delete }
+    
+pruebas_native:
+    path: /pruebas/native
+    defaults: { _controller: AppBundle:pruebas:nativeSql }
+    
+pruebas_form:
+    path: /pruebas/form
+    defaults: { _controller: AppBundle:pruebas:form }

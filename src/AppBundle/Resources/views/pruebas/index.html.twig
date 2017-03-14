@@ -1,0 +1,56 @@
+{# empty Twig template #}
+{% extends "::layout.html.twig" %}
+{% block body %}
+    {{texto}}
+    
+    <hr/>
+    {{ fruta.pera}}
+    {#% if fruta.pera!="rica" %#}
+    {#% if fruta.pera starts with 'f' %#}
+    {% if fruta.pera ends with 'a' %}
+        {{fruta.manzana}}
+    {%endif%}
+    
+    <hr/>
+    {% set variable = "Hola Twig" %}
+    {{variable}}
+    
+    <hr/>
+    {% if productos|length>4 %}
+        <ul>
+        {% for producto in productos %}
+            <li>{{ producto.producto }} - {{ producto.precio }}</li>
+        {% endfor%}
+        </ul>
+    {% endif %}
+    
+    <hr/>
+    {% set fecha = date() %}
+    {#% set fecha = date("-2 days", "Europe/Madrid") %#}
+    {#{ dump(fecha) }#}
+    {{ fecha.date|date("Y-m-d") }}
+    
+    <hr/>
+    {{include('AppBundle:pruebas:partial.html.twig')}}
+    
+    {#Numero maximo de un array#}
+    {{max([76,10,96,79])}}
+    {{min([76,10,96,79])}}
+    
+    <hr/>
+    {{random(1000)}}
+    {{random(['Batman', 'Pokemon', 'Dragon Ball', 'Digimon'])}}
+    
+    <hr/>
+    {#Imprime los numeros del rango de 5 en 5#}
+    {% for i in range(0, 25, 5) %}
+        {{i}}<br/>
+    {%endfor%}
+    
+    <hr/>
+    {{ generateTable(productos)|raw }}
+    
+    <hr/>
+    {{"cadena de texto"|addText(10)}}
+    
+{% endblock %}
