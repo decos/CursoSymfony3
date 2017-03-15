@@ -1,4 +1,9 @@
 {# empty Twig template #}
-Formulario con Symfony 3
+<h2>Formulario con Symfony 3</h2>
 {{form_start(form, {'action':'', 'method':'POST'})}}
+<label>
+    Campo Titulo:
+    {{form_errors(form.titulo)}}
+    {{form_widget(form.titulo)}}
+</label>
 {{form_end(form)}}
