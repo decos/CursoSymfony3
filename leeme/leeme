@@ -1,0 +1,93 @@
+-- CREAR PROYECTO SYMFONY
+	composer create-project symfony/framework-standard-edition symfony3/ "3.0.*"
+
+-- LIMPIAR CACHE (PRODUCCIÓN)
+	php bin/console cache:clear --env=prod
+
+--HOLA MUNDO
+	http://localhost/symfony3/web/app_dev.php/hello-world
+
+--CREACION DE BUNDLES
+	-- Ir al proyecto: /opt/lampp/htdocs/symfony3
+	-- Ejecutar: 	php bin/console generate:bundle --namespace=MiBundle --format=yml
+			php bin/console generate:bundle
+
+--ELIMINAR BUNDLE
+	/opt/lampp/htdocs/symfony3/app/AppKernel.php
+
+
+--MAPEO DE BASE DE DATOS
+	Creame un XML desde la estructura de la DB y mapealo a XML
+	php bin/console doctrine:mapping:convert xml ./src/AppBundle/Resources/doctrine/metadata/orm --from-database --force
+
+	Creacion con YML , estructura base de la entidad (Resources/config)
+ 	php bin/console doctrine:mapping:import AppBundle yml
+
+	Generacion de Entidades
+	php bin/console doctrine:generate:entities AppBundle
+
+--GENERAR ENTIDADES CON DOCTRINE
+	php bin/console doctrine:generate:entity
+
+	> Generating entity class src/AppBundle/Entity/Curso.php: OK! (ENTIDAD)
+	> Generating repository class src/AppBundle/Repository/CursoRepository.php: OK! (MODELO DE CONSULTA)
+	> Generating mapping file src/AppBundle/Resources/config/doctrine/Curso.orm.yml: OK! (FICHERO DE CONFIGURACION)
+
+--GENERAR TABLAS APARTIR DE ENTIDADES
+	php bin/console doctrine:schema:update --force
+
+	INDICA QUE HA CREADO UNA TABLA EN LA BASE DE DATOS
+	Updating database schema...
+	Database schema updated successfully! "1" query was executed
+
+	DROPEAR TODAS LAS TABLAS DE LA BASE DE DATOS
+	php bin/console doctrine:schema:drop --force
+
+	GENERAR LAS TABLAS DESDE CERO	
+	php bin/console doctrine:schema:create
+	
+--CREAR FORMULARIOS
+	php bin/console doctrine:generate:form AppBundle:Curso
+
+--ACTIVAR LA VALIDACIÓN DE FORMULARIOS
+	/opt/lampp/htdocs/symfony3/app/config/config.yml
+	validation:      { enable_annotations: true }
+	validation:      { enabled: true, enable_annotations: true }
+
+- Las validaciones se hacen a nivel de entidad
+- Si se quiere validar datos de forma aislada, se debe usar el servicio Validator de otra forma.
+
+--MÁS SOBRE FORMULARIOS, han habido muchos cambios en la versión 3
+	http://symfony.com/doc/current/best_practices/forms.html
+
+--PROYECTO BLOG
+-- Generar un Bundle nuevo
+	php bin/console generate:bundle
+	
+-- Configurar la base de datos
+	/opt/lampp/htdocs/symfony3/app/config/parameters.yml
+	database_name: blog
+
+-- Mapear Tablas de base de datos al proyecto
+	php bin/console doctrine:mapping:convert xml ./src/BlogBundle/Resources/config/doctrine/metadata/orm --from-database --force
+
+-- Cambiar nombre de archivos mapeados a entidad (archivo y mapeo
+	Categories.orm.xml => Category.orm.xml	
+	<entity name="Category" table="categories">
+
+-- Configuracion de las entidades
+	Donde estaran defininas cada campo y cada tipo de dato que es cada campo
+	php bin/console doctrine:mapping:import BlogBundle yml
+
+-- Generar las clases php de las entidades
+	php bin/console doctrine:generate:entities BlogBundle
+
+-- Modificar en las relaciones generadas
+	EX: targetEntity: Users => targetEntity: User
+	/opt/lampp/htdocs/symfony3/src/BlogBundle/Resources/config/doctrine/EntryTag.orm.yml
+	/opt/lampp/htdocs/symfony3/src/BlogBundle/Resources/config/doctrine/Entry.orm.yml
+
+-- manyToOne
+	/opt/lampp/htdocs/symfony3/src/BlogBundle/Resources/config/doctrine/Entry.orm.yml
+	Muchas entradas pueden ser de un Usuario
+	Muchas entradas pueden tener una Categoria
