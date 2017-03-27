@@ -3,11 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/opt/lampp/htdocs/symfony3/src/BlogBundle/Resources/config/doctrine/Entry.orm.yml</file>
-            <file>file:/opt/lampp/htdocs/symfony3/app/config/parameters.yml</file>
-            <file>file:/opt/lampp/htdocs/symfony3/src/BlogBundle/Entity/Entry.php</file>
-            <file>file:/opt/lampp/htdocs/symfony3/database.sql</file>
+            <file>file:/opt/lampp/htdocs/symfony3/src/BlogBundle/Resources/views/Default/index.html.twig</file>
+            <file>file:/opt/lampp/htdocs/symfony3/src/BlogBundle/Resources/config/routing.yml</file>
+            <file>file:/opt/lampp/htdocs/symfony3/src/BlogBundle/Controller/UserController.php</file>
+            <file>file:/opt/lampp/htdocs/symfony3/app/config/security.yml</file>
+            <file>file:/opt/lampp/htdocs/symfony3/src/BlogBundle/Entity/User.php</file>
+            <file>file:/opt/lampp/htdocs/symfony3/src/BlogBundle/Resources/views/layout.html.twig</file>
             <file>file:/opt/lampp/htdocs/symfony3/src/BlogBundle/Controller/DefaultController.php</file>
+            <file>file:/opt/lampp/htdocs/symfony3/src/BlogBundle/Resources/views/User/login.html.twig</file>
         </group>
     </open-files>
 </project-private>

@@ -100,4 +100,27 @@
 	https://www.bootstrapcdn.com/
 	https://developers.google.com/speed/libraries/
 	http://getbootstrap.com/components/#navbar
+
+--AUTENTICACION:LOGIN USUARIOS (SEGURIDAD)
+	/opt/lampp/htdocs/symfony3/app/config/security.yml
+	providers: Usuarios que se van identificar de forma hardcodeada
+	LEER DE LA BASE DE DATOS	
+	our_db_provider:
+                class:BlogBundle:User
+                property: email #USERNAME
+	
+ 	main: #COMO SE VA AUTENTICAR
+		provider: our_db_provider
+	    	form_login:
+	        	login_path: /login
+		        check_path: /login_check
+	    	logout:
+		        path: /logout
+		        target: /login
+
+	TIPO DE AUTENTICACION
+		encoders:
+			BlogBundle\Entity\User:
+			    algorithm: bcrypt
+			    cost: 4
 	
