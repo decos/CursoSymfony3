@@ -63,4 +63,10 @@ BlogBundle\Entity\Entry:
                 user_id:
                     referencedColumnName: id
             orphanRemoval: false
+    #ONE TO MANY (Para una entrada puedes tener muchas Tags)
+    oneToMany:
+        entryTag:
+            targetEntity: EntryTag
+            mappedBy: entry
+            cascade: ["persist"]
     lifecycleCallbacks: {  }

@@ -2,6 +2,9 @@
 
 namespace BlogBundle\Entity;
 
+ //ONE TO MANY (Para una entrada puedes tener muchas Tags)
+use Doctrine\Common\Collections\ArrayCollection;
+
 /**
  * Entry
  */
@@ -42,6 +45,13 @@ class Entry
      */
     private $user;
 
+    //ONE TO MANY (Para una entrada puedes tener muchas Tags)
+    protected $entryTag;
+    
+    public function __construct() {
+        //Cuando nos devuelva el Tag sera un Array de Objetos
+        $this->entryTag = new ArrayCollection();
+    }
 
     /**
      * Get id
@@ -196,5 +206,16 @@ class Entry
     {
         return $this->user;
     }
+    
+    //ONE TO MANY (Para una entrada puedes tener muchas Tags)
+    public function addEntryTag(BlogBundle\Entity\Tag $tag){
+        $this->entryTag[] = $tag;
+        return $this;
+    }
+    
+    public function getEntryTag(){
+        return $this->entryTag;
+    }
+    
 }
 
