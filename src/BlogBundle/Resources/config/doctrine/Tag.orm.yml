@@ -23,4 +23,10 @@ BlogBundle\Entity\Tag:
             length: 65535
             options:
                 fixed: false
+    # Para un tag puedes tener muchas entradas
+    oneToMany:
+        entryTag:
+            targetEntity: EntryTag
+            mappedBy: tag
+            cascade: ["persist"]
     lifecycleCallbacks: {  }

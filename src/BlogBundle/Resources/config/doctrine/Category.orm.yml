@@ -23,4 +23,12 @@ BlogBundle\Entity\Category:
             length: 65535
             options:
                 fixed: false
+    
+    #ONE TO MANY (Para una categoria puedes tener muchas Entradas)
+    oneToMany:
+        entry:
+            targetEntity: Entry
+            mappedBy: category
+            cascade: ["persist"]
+            
     lifecycleCallbacks: {  }

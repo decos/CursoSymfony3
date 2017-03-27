@@ -48,7 +48,9 @@ BlogBundle\Entity\Entry:
             cascade: {  }
             fetch: LAZY
             mappedBy: null
-            inversedBy: null
+            #Indicar que va usar la entidad Entry
+            #inversedBy: null
+            inversedBy: entry
             joinColumns:
                 category_id:
                     referencedColumnName: id

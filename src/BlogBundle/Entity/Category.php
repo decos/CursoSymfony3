@@ -2,6 +2,8 @@
 
 namespace BlogBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+
 /**
  * Category
  */
@@ -22,6 +24,14 @@ class Category
      */
     private $description;
 
+    //ONE TO MANY (Para una categoria puedes tener muchas Entradas)
+    protected $entry;
+    
+    public function __construct() {
+        //Cuando nos devuelva la Entrada sera un Array de Objetos
+        $this->entry = new ArrayCollection();
+    }
+    
 
     /**
      * Get id
@@ -80,5 +90,12 @@ class Category
     {
         return $this->description;
     }
+    
+    //ONE TO MANY (Para una categoria puedes tener muchas Entradas)
+    public function getEntries(){
+        return $this->entry;
+    }
+    
+    
 }
 
