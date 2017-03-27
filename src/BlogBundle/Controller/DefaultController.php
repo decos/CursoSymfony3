@@ -7,7 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 class DefaultController extends Controller
 {
     // RELACIONES MUCHOS A MUCHOS
-    public function indexAction()
+    public function relacionAction()
     {
         //Ejemplo: Listar todas las entradas
         //$em = $this->getDoctrine()->getManager();
@@ -47,6 +47,7 @@ class DefaultController extends Controller
                 echo "<hr>";
         }*/
         
+        
         $em = $this->getDoctrine()->getEntityManager();
         $tag_repo = $em->getRepository("BlogBundle:Tag");
         $tags = $tag_repo->findAll();
@@ -66,6 +67,10 @@ class DefaultController extends Controller
         }
         
         die();        
+        return $this->render('BlogBundle:Default:index.html.twig');
+    }
+    
+    public function indexAction(){
         return $this->render('BlogBundle:Default:index.html.twig');
     }
 }

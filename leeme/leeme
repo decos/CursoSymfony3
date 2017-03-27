@@ -91,3 +91,13 @@
 	/opt/lampp/htdocs/symfony3/src/BlogBundle/Resources/config/doctrine/Entry.orm.yml
 	Muchas entradas pueden ser de un Usuario
 	Muchas entradas pueden tener una Categoria
+
+--MAS SOBRE RELACIONES
+	https://symfony.com/doc/current/doctrine/associations.html
+	http://docs.doctrine-project.org/en/latest/reference/association-mapping.html
+
+--CREANDO LA PLANTILLA BASE
+	https://www.bootstrapcdn.com/
+	https://developers.google.com/speed/libraries/
+	http://getbootstrap.com/components/#navbar
+	
