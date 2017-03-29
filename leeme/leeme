@@ -123,4 +123,7 @@
 			BlogBundle\Entity\User:
 			    algorithm: bcrypt
 			    cost: 4
+
+--FORMULARIO DE REGISTRO
+	php bin/console doctrine:generate:form BlogBundle:User
 	
