@@ -1,16 +1,40 @@
 {% extends "BlogBundle::layout.html.twig" %}
 {% block content %}
     
+    {#% if error %}
+        <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+    {% endif %#}
+    
+    {#% if app.user != null %}    
+        {{dump(app.user)}}
+    {% endif %#}    
+    
+    {% if is_granted('ROLE_USER') %}
+        <strong>
+            Estas logueado como usuario normal
+        </strong>
+    {% endif %}
+    
+    {% if is_granted('ROLE_ADMIN') %}
+        <strong>
+            Estas logueado como usuario  ADMINISTRADOR TODOPODEROSO
+        </strong>
+    {% endif %}
+    
         <div class="col-lg-4">
             <h2>Identifícate</h2>
             <hr/>
             <form action="{{path("login_check")}}" method="POST" >
                 <label>Email:</label>
+                <!-- Siempre poner en el valor del campo "name" el guion abajo antes del valor -->
                 <input type="email" id="username" name="_username" value="{{ last_username }}" class="form-control">
                 <br/>
                 <label>Contraseña:</label>
                 <input type="password" id="password" name="_password"  class="form-control">
-                <input type="submit" value="Entrar" />
+                <br/>
+                <input type="submit" value="Entrar" class="btn btn-success" />
+                <!-- Redireccionar si todo es correcto -->
+                <input type="hidden" name="_target_path" value="/login" />
             </form>
         </div>
         <!-- Para que limpie los campos flotantes -->

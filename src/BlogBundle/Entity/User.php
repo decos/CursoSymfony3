@@ -217,5 +217,7 @@ class User implements UserInterface
         
     }
     
+    //FIN AUTH
+    
 }
 

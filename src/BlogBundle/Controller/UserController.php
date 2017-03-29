@@ -15,7 +15,7 @@ class UserController extends Controller
         $error = $authenticationUtils->getLastAuthenticationError();
         //
         $lastUsername = $authenticationUtils->getLastUsername();
-        
+        //Devolver la vista
         return $this->render("BlogBundle:User:login.html.twig", array(
             "error" => $error,
             "last_username" => $lastUsername

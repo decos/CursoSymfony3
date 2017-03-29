@@ -10,6 +10,7 @@ security:
     providers:
         #in_memory:
             #memory: ~
+        #LE PUEDES PONER CUALQUIER NOMBRE AL PROVIDER
         our_db_provider:
                 entity:
                     class: BlogBundle:User
@@ -23,7 +24,8 @@ security:
 
         main:
             anonymous: ~
-            provider: our_db_provider
+            #ASIGNAR EL PROVIDER CREADO ARRIBA
+            provider: our_db_provider 
             form_login:
                 login_path: /login
                 check_path: /login_check
