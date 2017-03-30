@@ -137,3 +137,8 @@
 		$this->session->getFlashBag()->add("status", $status);
 
 --CIFRAR CONTRASEÑAS
+	$factory = $this->get("security.encoder_factory");
+        $encoder = $factory->getEncoder($user);
+	$password = $encoder->encodePassword(
+        $form->get("password")->getData(), $user->getSalt());                        
+        $user->setPassword($password);
