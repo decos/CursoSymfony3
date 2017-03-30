@@ -32,33 +32,42 @@ class UserController extends Controller
         
         if($form->isSubmitted()){
                 if($form->isValid()){
-                        $user = new User();
-                        $user->setName($form->get("name")->getData());
-                        $user->setSurname($form->get("surname")->getData());
-                        $user->setEmail($form->get("email")->getData());
-                        
-                        //CIFRAR CONTRASEÑAS
-                        //En lugar de crear el objeto 'tal' podemos llamarlo con el GET
-                        $factory = $this->get("security.encoder_factory");
-                        $encoder = $factory->getEncoder($user);
-                        $password = $encoder->encodePassword(
-                                $form->get("password")->getData(), $user->getSalt());                        
-                        $user->setPassword($password);
-                        //$user->setPassword($form->get("password")->getData());
-                        
-                        $user->setRole("ROLE_USER");
-                        $user->setImagen(null);
-
+                        //Control de usuarios duplicados
                         $em = $this->getDoctrine()->getEntityManager();
-                        $em->persist($user);
-                        $flush = $em->flush();
-                        if($flush == null){
-                                $status = "El usuario se ha creado correctamente";
-                        }else{
-                                $status = "No te has registardo correctamente";
-                        }
+                        $user_repo = $em->getRepository("BlogBundle:User");
+                        $user = $user_repo->findOneBy(array("email" => 
+                                $form->get("email")->getData()));
+                        
+                        if(count($user) == 0){
+                                $user = new User();
+                                $user->setName($form->get("name")->getData());
+                                $user->setSurname($form->get("surname")->getData());
+                                $user->setEmail($form->get("email")->getData());
 
-                        //$status = "Formulario válido";
+                                //CIFRAR CONTRASEÑAS
+                                //En lugar de crear el objeto 'tal' podemos llamarlo con el GET
+                                $factory = $this->get("security.encoder_factory");
+                                $encoder = $factory->getEncoder($user);
+                                $password = $encoder->encodePassword(
+                                        $form->get("password")->getData(), $user->getSalt());                        
+                                $user->setPassword($password);
+                                //$user->setPassword($form->get("password")->getData());
+
+                                $user->setRole("ROLE_USER");
+                                $user->setImagen(null);
+
+                                $em = $this->getDoctrine()->getEntityManager();
+                                $em->persist($user);
+                                $flush = $em->flush();
+                                if($flush == null){
+                                        $status = "El usuario se ha creado correctamente";
+                                }else{
+                                        $status = "No te has registardo correctamente";
+                                }
+                                //$status = "Formulario válido";
+                        } else {
+                                $status = "El usuario ya existe";
+                        }
                 } else{
                         $status = "No te has registardo correctamente";
                         //$status = "No usuario no se ha creado correctamente";
