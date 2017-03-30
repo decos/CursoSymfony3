@@ -127,3 +127,11 @@
 --FORMULARIO DE REGISTRO
 	php bin/console doctrine:generate:form BlogBundle:User
 	
+--MENSAJES FLASH
+	1. Importar el objeto Session
+	2. Crear atributo privado $session
+	3. Crear constructor si es que no hay
+	4. Crear el objeto new Sesion
+		De esta forma no tenemos que crear el objeto una y otra vez
+	5.- Ponerlo dentro del metodo isSubmitted()
+		$this->session->getFlashBag()->add("status", $status);
