@@ -135,3 +135,5 @@
 		De esta forma no tenemos que crear el objeto una y otra vez
 	5.- Ponerlo dentro del metodo isSubmitted()
 		$this->session->getFlashBag()->add("status", $status);
+
+--CIFRAR CONTRASEÑAS

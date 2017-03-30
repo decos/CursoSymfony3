@@ -36,7 +36,16 @@ class UserController extends Controller
                         $user->setName($form->get("name")->getData());
                         $user->setSurname($form->get("surname")->getData());
                         $user->setEmail($form->get("email")->getData());
-                        $user->setPassword($form->get("password")->getData());
+                        
+                        //CIFRAR CONTRASEÑAS
+                        //En lugar de crear el objeto 'tal' podemos llamarlo con el GET
+                        $factory = $this->get("security.encoder_factory");
+                        $encoder = $factory->getEncoder($user);
+                        $password = $encoder->encodePassword(
+                                $form->get("password")->getData(), $user->getSalt());                        
+                        $user->setPassword($password);
+                        //$user->setPassword($form->get("password")->getData());
+                        
                         $user->setRole("ROLE_USER");
                         $user->setImagen(null);
 
