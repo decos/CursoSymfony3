@@ -2,13 +2,6 @@
 {% block content %}
     <div class="col-lg-4">
         <h2>Añadir Etiquetas</h2>
-        
-        {% for message in app.session.flashbag().get('status') %}
-            <div class="alert alert-success"> 
-                {{ message}}
-            </div>
-        {% endfor %}
-        
         {{form_start(form)}}
         {{form_end(form)}}
     </div>

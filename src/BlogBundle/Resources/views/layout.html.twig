@@ -66,9 +66,10 @@
                                                 {% if app.user == null %}    
                                                         <li><a href={{ path("login")}}>Entrar</a></li>
                                                 {% else %}
+                                                        <li><a href={{ path("blog_index_tag")}}>Etiquetas</a></li>
+                                                        <li role="separator" class="divider"></li>
                                                         <li><a href={{ path("logout")}}>Salir</a></li>
                                                 {% endif %}
-                                                <li role="separator" class="divider"></li>
                                                 <li><a href="#">Ayuda</a></li>
                                         </ul>
                                 </li>
