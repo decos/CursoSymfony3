@@ -4,13 +4,12 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/opt/lampp/htdocs/symfony3/src/BlogBundle/Resources/config/routing.yml</file>
-            <file>file:/opt/lampp/htdocs/symfony3/src/BlogBundle/Form/UserType.php</file>
+            <file>file:/opt/lampp/htdocs/symfony3/src/BlogBundle/Resources/views/Tag/add.html.twig</file>
             <file>file:/opt/lampp/htdocs/symfony3/src/BlogBundle/Controller/UserController.php</file>
-            <file>file:/opt/lampp/htdocs/symfony3/app/config/security.yml</file>
-            <file>file:/opt/lampp/htdocs/symfony3/src/BlogBundle/Entity/User.php</file>
-            <file>file:/opt/lampp/htdocs/symfony3/src/BlogBundle/Resources/views/layout.html.twig</file>
+            <file>file:/opt/lampp/htdocs/symfony3/src/BlogBundle/Controller/TagController.php</file>
             <file>file:/opt/lampp/htdocs/symfony3/src/BlogBundle/Controller/DefaultController.php</file>
             <file>file:/opt/lampp/htdocs/symfony3/src/BlogBundle/Resources/views/User/login.html.twig</file>
+            <file>file:/opt/lampp/htdocs/symfony3/src/BlogBundle/Resources/config/validation.yml</file>
         </group>
     </open-files>
 </project-private>

@@ -142,3 +142,12 @@
 	$password = $encoder->encodePassword(
         $form->get("password")->getData(), $user->getSalt());                        
         $user->setPassword($password);
+
+--CREAR Y VALIDAR FORMULARIOS DE ETIQUETAS
+	php bin/console doctrine:generate:form BlogBundle:Tag
+
+	--VALIDACIONES
+		--Las validaciones solo funcionan si tienes configurado en config.yml lo sgte:
+		validation:      { enabled: true, enable_annotations: false }
+
+	
