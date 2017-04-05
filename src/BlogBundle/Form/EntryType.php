@@ -29,16 +29,16 @@ class EntryType extends AbstractType
                                 "attr" => array( "class" => "form-control" )))
             ->add('status' , ChoiceType::class, 
                         array("label" => "Estado" , "choices" => array(
-                                    "public" => "Publicado",
-                                    "private" => "Privado"
+                                    "Público" => "public",
+                                    "Privado" => "private"
                             ), "attr" => array( "class" => "form-control" )))
             ->add('image' , FileType::class, 
                         array("label" => "Imagen" , "attr" => array("class" => "form-control")))
             ->add('category' , EntityType::class,  //se conectara a doctrine para sacar la data de categoria
-                        array("label" => "Categoría" , "class" => "BlogBundle:Category", 
+                        array("label" => "Categorías" , "class" => "BlogBundle:Category", 
                                 "attr" => array( "class" => "form-control")))
             //campos referenciales
-                ->add('tags' , TextType::class, 
+            ->add('tags' , TextType::class, 
                         array("label" => "Etiquetas" , "mapped" => false,
                                 "attr" => array( "class" => "form-control" )))
             //submit

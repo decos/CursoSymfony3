@@ -39,31 +39,38 @@ class EntryController extends Controller
                 if($form->isSubmitted()){
                         if($form->isValid()){
                                 
-                                
-                            
-                                /*
                                 $em = $this->getDoctrine()->getEntityManager();
-                            
-                                $category = new Category();
-                                $category->setName($form->get("name")->getData());
-                                $category->setDescription($form->get("description")->getData());
-
-                                $em->persist($category);
+                                
+                                $entry  = new Entry();
+                                $entry->setTitle($form->get("title")->getData());
+                                $entry->setStatus($form->get("status")->getData());
+                                $entry->setContent($form->get("content")->getData());
+                                $entry->setImage(null);
+                                
+                                //
+                                $category_repo = $em->getRepository("BlogBundle:Category");
+                                $category = $category_repo->find($form->get("category")->getData());
+                                $entry->setCategory($category);
+                                
+                                //$user = $this->get("security.context")->getToken()->getUser();
+                                $user = $this->getUser();
+                                $entry->setUser($user);
+                                
+                                $em->persist($entry);
                                 $flush = $em->flush();
                                 
                                 if($flush == null){
-                                        $status = "La categoría se ha creado correctamente";
+                                        $status = "La entrada se ha creado correctamente";
                                 } else{
-                                        $status = "Error al crear la categoría !!";
+                                        $status = "Error al crear la entrada !!";
                                 }
-                                */
                                 
                         } else {
-                                $status = "La categoría no se ha creado porque el formulario no es válido";
+                                $status = "La entrada no se ha creado porque el formulario no es válido";
                         }
 
-//                        $this->session->getFlashBag()->add("status", $status);
-//                        return $this->redirectToRoute("blog_index_category");
+                        $this->session->getFlashBag()->add("status", $status);
+                        //return $this->redirectToRoute("blog_index_entry");
                 } 
 
                 return $this->render("BlogBundle:Entry:add.html.twig", array(

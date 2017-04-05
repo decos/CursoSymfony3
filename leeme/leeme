@@ -160,7 +160,12 @@
 	En mi caso no lo genero
 
 	-- El siguiente atributo no debe estar mapeado
-	"mapped" => false
+	    "mapped" => false
 
 	-- Crear en la clase Category un metodo llamado toString()
+	    public function __toString() {
+		return $this->name;
+	    }
+	
+--GUARDAR ENTRADAS
 	
