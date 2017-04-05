@@ -152,4 +152,15 @@
 
 --CREAR FORMULARIO CATEGORIAS
 	php bin/console doctrine:generate:form BlogBundle:Category
+
+--CREAR FORMULARIO ENTRADAS
+	php bin/console doctrine:generate:form BlogBundle:Entry
+	--BUG
+	Va generar un error porque el tipo de dato referencia a otro objeto que no esta en la misma clase (video)
+	En mi caso no lo genero
+
+	-- El siguiente atributo no debe estar mapeado
+	"mapped" => false
+
+	-- Crear en la clase Category un metodo llamado toString()
 	

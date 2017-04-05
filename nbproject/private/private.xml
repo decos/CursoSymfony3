@@ -4,11 +4,11 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/opt/lampp/htdocs/symfony3/src/BlogBundle/Resources/config/routing.yml</file>
-            <file>file:/opt/lampp/htdocs/symfony3/src/BlogBundle/Resources/views/Tag/add.html.twig</file>
-            <file>file:/opt/lampp/htdocs/symfony3/src/BlogBundle/Controller/TagController.php</file>
+            <file>file:/opt/lampp/htdocs/symfony3/src/BlogBundle/Form/TagType.php</file>
             <file>file:/opt/lampp/htdocs/symfony3/src/BlogBundle/Resources/views/layout.html.twig</file>
-            <file>file:/opt/lampp/htdocs/symfony3/src/BlogBundle/Controller/DefaultController.php</file>
-            <file>file:/opt/lampp/htdocs/symfony3/src/BlogBundle/Resources/views/Tag/index.html.twig</file>
+            <file>file:/opt/lampp/htdocs/symfony3/src/BlogBundle/Controller/CategoryController.php</file>
+            <file>file:/opt/lampp/htdocs/symfony3/src/BlogBundle/Form/EntryType.php</file>
+            <file>file:/opt/lampp/htdocs/symfony3/src/BlogBundle/Resources/views/Category/index.html.twig</file>
         </group>
     </open-files>
 </project-private>
