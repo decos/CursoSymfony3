@@ -206,3 +206,5 @@
 	entry.entryTag
 		/opt/lampp/htdocs/symfony3/src/BlogBundle/Entity/Entry.php
 		entryTag debe ser publico
+	--Imagenes
+		<p> <img class="pull-left" style="margin-right: 20px" width="200px" src=" {{ asset("uploads/"~entry.image) }} "/> </p>
