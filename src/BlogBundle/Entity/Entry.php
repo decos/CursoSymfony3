@@ -46,7 +46,7 @@ class Entry
     private $user;
 
     //ONE TO MANY (Para una entrada puedes tener muchas Tags)
-    protected $entryTag;
+    public  $entryTag;
     
     public function __construct() {
         //Cuando nos devuelva el Tag sera un Array de Objetos

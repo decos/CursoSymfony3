@@ -201,3 +201,8 @@
      		* @var \BlogBundle\Entity\Tag
      		*/
 	   4. 	public function setTag(\BlogBundle\Entity\Tag $tag = null)
+
+--MOSTRAR ENTRADAS 
+	entry.entryTag
+		/opt/lampp/htdocs/symfony3/src/BlogBundle/Entity/Entry.php
+		entryTag debe ser publico
