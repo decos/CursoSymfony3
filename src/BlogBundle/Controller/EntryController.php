@@ -40,6 +40,9 @@ class EntryController extends Controller
                         if($form->isValid()){
                                 
                                 $em = $this->getDoctrine()->getEntityManager();
+                                $category_repo = $em->getRepository("BlogBundle:Category");
+                                //Llamar al Repositorio Entrada
+                                $entry_repo = $em->getRepository("BlogBundle:Entry");
                                 
                                 $entry  = new Entry();
                                 $entry->setTitle($form->get("title")->getData());
@@ -61,7 +64,6 @@ class EntryController extends Controller
                                 $entry->setImage($file_name);
                                 
                                 
-                                $category_repo = $em->getRepository("BlogBundle:Category");
                                 $category = $category_repo->find($form->get("category")->getData());
                                 $entry->setCategory($category);
                                 
@@ -71,6 +73,15 @@ class EntryController extends Controller
                                 
                                 $em->persist($entry);
                                 $flush = $em->flush();
+                                
+                                //Almacenar TAGS
+                                $entry_repo->saveEntryTags(
+                                        $form->get("tags")->getData(),
+                                        $form->get("title")->getData(),
+                                        $category,
+                                        $user,
+                                        $entry
+                                );
                                 
                                 if($flush == null){
                                         $status = "La entrada se ha creado correctamente";

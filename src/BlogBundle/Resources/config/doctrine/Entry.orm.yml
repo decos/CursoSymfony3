@@ -1,6 +1,8 @@
 BlogBundle\Entity\Entry:
     type: entity
     table: entries
+    #Vincular el repostory Entry con la entidad Entry en el YML#
+    repositoryClass: BlogBundle\Repository\EntryRepository
     indexes:
         pk_entries_users:
             columns:

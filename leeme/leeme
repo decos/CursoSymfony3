@@ -137,6 +137,8 @@
 		$this->session->getFlashBag()->add("status", $status);
 
 --CIFRAR CONTRASEÑAS
+	https://www.dailycred.com/article/bcrypt-calculator
+
 	$factory = $this->get("security.encoder_factory");
         $encoder = $factory->getEncoder($user);
 	$password = $encoder->encodePassword(
@@ -167,7 +169,7 @@
 		return $this->name;
 	    }
 	
---SUBIR ARCHIVOSY ASIGNAR IMAGENES A LAS ENTRADAS
+--SUBIR ARCHIVOS Y ASIGNAR IMAGENES A LAS ENTRADAS
 	1. /opt/lampp/htdocs/symfony3/src/BlogBundle/Resources/views/Entry/add.html.twig
 		{{form_start(form, {'enctype':'multipart/form-data'})}}
 	2. Obtener el fichero
@@ -180,3 +182,22 @@
 		$file->move("uploads", $file_name);
 	6. Crear directorio uploads
 	7. Otorgar permisos de escritura
+
+--ASIGNAR ETIQUETAS A ENTRADAS
+	-- Crear un directorio REPOSITORY en el bundle
+	-- Crear un fichero php dentro con el nombre EntryRepository
+
+	-- Vincular la configuracion YML de la entidad Entry con el Repositorio que se usa
+		/opt/lampp/htdocs/symfony3/src/BlogBundle/Resources/config/doctrine/Entry.orm.yml
+		repositoryClass: BlogBundle\Repository\EntryRepository
+
+	-- Corregir los errores en la clase EntryTag
+	   /opt/lampp/htdocs/symfony3/src/BlogBundle/Entity/EntryTag.php
+	   1.	/**
+	     	* @var \BlogBundle\Entity\Entry
+	     	*/
+	   2.	 public function setEntry(\BlogBundle\Entity\Entry $entry = null)
+	   3.   /**
+     		* @var \BlogBundle\Entity\Tag
+     		*/
+	   4. 	public function setTag(\BlogBundle\Entity\Tag $tag = null)
