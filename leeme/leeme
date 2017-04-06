@@ -167,5 +167,16 @@
 		return $this->name;
 	    }
 	
---GUARDAR ENTRADAS
-	
+--SUBIR ARCHIVOSY ASIGNAR IMAGENES A LAS ENTRADAS
+	1. /opt/lampp/htdocs/symfony3/src/BlogBundle/Resources/views/Entry/add.html.twig
+		{{form_start(form, {'enctype':'multipart/form-data'})}}
+	2. Obtener el fichero
+		$file = $form["image"]->getData(); 
+	3. Obtener la extension del fichero
+		$ext = $file->guessExtension();
+	4. Asignarle un nombre al fichero
+		$file_name = time(). "." . $ext;
+	5. Mover a un directorio "uploads",  se coloca dentro del directorio web del framework
+		$file->move("uploads", $file_name);
+	6. Crear directorio uploads
+	7. Otorgar permisos de escritura

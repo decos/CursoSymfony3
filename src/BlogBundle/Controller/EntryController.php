@@ -45,9 +45,22 @@ class EntryController extends Controller
                                 $entry->setTitle($form->get("title")->getData());
                                 $entry->setStatus($form->get("status")->getData());
                                 $entry->setContent($form->get("content")->getData());
-                                $entry->setImage(null);
                                 
-                                //
+                                
+                                //UPLOAD FILE
+                                //Lo mismo: $form->get("image")->getData()
+                                $file = $form["image"]->getData(); 
+                                //obtener la extension
+                                $ext = $file->guessExtension();
+                                //asignar un nombre
+                                $file_name = time(). "." . $ext;
+                                //movemos a un directorio que se va llamar "uploads"
+                                //ese directorio se coloca dentro del directorio web del framework
+                                $file->move("uploads", $file_name);
+                                //setear base de datos con el mismo nombre
+                                $entry->setImage($file_name);
+                                
+                                
                                 $category_repo = $em->getRepository("BlogBundle:Category");
                                 $category = $category_repo->find($form->get("category")->getData());
                                 $entry->setCategory($category);
