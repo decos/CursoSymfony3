@@ -208,3 +208,15 @@
 		entryTag debe ser publico
 	--Imagenes
 		<p> <img class="pull-left" style="margin-right: 20px" width="200px" src=" {{ asset("uploads/"~entry.image) }} "/> </p>
+
+--MOSTRAR CATEGORIAS
+	CREAR
+	/opt/lampp/htdocs/symfony3/src/BlogBundle/Resources/views/Category/menu.categories.html.twig
+
+	LLAMAR 
+	/opt/lampp/htdocs/symfony3/src/BlogBundle/Resources/views/Entry/index.html.twig
+
+	CODEAR (funcion INDEX)
+	/opt/lampp/htdocs/symfony3/src/BlogBundle/Controller/EntryController.php
+
+
