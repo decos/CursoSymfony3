@@ -21,8 +21,13 @@ class EntryController extends Controller
                 $em  = $this->getDoctrine()->getEntityManager();
                 $entry_repo = $em->getRepository("BlogBundle:Entry");
                 $entries = $entry_repo->findAll();
+                
+                $category_repo = $em->getRepository("BlogBundle:Category");
+                $categories = $category_repo->findAll();
+                
                 return $this->render("BlogBundle:Entry:index.html.twig", array(
-                                'entries' => $entries
+                                'entries' => $entries,
+                                'categories' => $categories
                         )
                 );
                 
