@@ -107,7 +107,7 @@ class EntryController extends Controller
                         )
                 );
         }
-        
+        /*
         public function editAction(Request $request, $id){
                 $em = $this->getDoctrine()->getEntityManager();
                 $category_repo = $em->getRepository("BlogBundle:Category");
@@ -145,20 +145,28 @@ class EntryController extends Controller
                         )
                 );
                  
-        }
+        }*/
         
         public function deleteAction($id){
+            
                 $em = $this->getDoctrine()->getEntityManager();
-                $category_repo = $em->getRepository("BlogBundle:Category");
-                $category = $category_repo->find($id);
+                $entry_repo = $em->getRepository("BlogBundle:Entry");
+                $entry = $entry_repo->find($id);
                 
-                //FALTA VER LA SIGUIENTE LINEA
-                if(count($category->getEntries()) == 0){
-                    $em->remove($category);
-                    $em->flush();
+                $entry_tag_repo = $em->getRepository("BlogBundle:EntryTag");
+                $entry_tags = $entry_tag_repo->findBy(array("entry" => $entry));
+                foreach ($entry_tags as $et){
+                        //if(is_object($et)){
+                        $em->remove($et);
+                        $em->flush();
+                        //}
                 }
+                //if(is_object($entry)){
+                $em->remove($entry);
+                $em->flush();
+                //}
+                return $this->redirectToRoute("blog_homepage");
                 
-                return $this->redirectToRoute("blog_index_category");
         }
     
 }
