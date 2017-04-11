@@ -107,45 +107,82 @@ class EntryController extends Controller
                         )
                 );
         }
-        /*
+       
+        
         public function editAction(Request $request, $id){
                 $em = $this->getDoctrine()->getEntityManager();
-                $category_repo = $em->getRepository("BlogBundle:Category");
-                $category = $category_repo->find($id);
+                $entry_repo = $em->getRepository("BlogBundle:Entry");
+                $entry = $entry_repo->find($id);
                 
-                $form = $this->createForm(CategoryType::class, $category);
+                $category_repo = $em->getRepository("BlogBundle:Category");
+                //$category = $category_repo->find($id);
+                
+                $form = $this->createForm(EntryType::class, $entry);
+                //Bindear, Unir, los datos que viajen por POST al formulario
                 $form->handleRequest($request);
                 
-                if($form->isSubmitted()){
+                 if($form->isSubmitted()){
                         if($form->isValid()){
                                 
-                                $category->setName($form->get("name")->getData());
-                                $category->setDescription($form->get("description")->getData());
-
-                                $em->persist($category);
+                                $entry->setTitle($form->get("title")->getData());
+                                $entry->setStatus($form->get("status")->getData());
+                                $entry->setContent($form->get("content")->getData());
+                                
+                                //UPLOAD FILE
+                                //Lo mismo: $form->get("image")->getData()
+                                $file = $form["image"]->getData(); 
+                                //obtener la extension
+                                $ext = $file->guessExtension();
+                                //asignar un nombre
+                                $file_name = time(). "." . $ext;
+                                //movemos a un directorio que se va llamar "uploads"
+                                //ese directorio se coloca dentro del directorio web del framework
+                                $file->move("uploads", $file_name);
+                                //setear base de datos con el mismo nombre
+                                $entry->setImage($file_name);
+                                
+                                
+                                $category = $category_repo->find($form->get("category")->getData());
+                                $entry->setCategory($category);
+                                
+                                //$user = $this->get("security.context")->getToken()->getUser();
+                                $user = $this->getUser();
+                                $entry->setUser($user);
+                                
+                                $em->persist($entry);
                                 $flush = $em->flush();
                                 
+                                //Almacenar TAGS
+                                $entry_repo->saveEntryTags(
+                                        $form->get("tags")->getData(),
+                                        $form->get("title")->getData(),
+                                        $category,
+                                        $user,
+                                        $entry
+                                );
+                                
                                 if($flush == null){
-                                        $status = "La categoría se ha editado correctamente";
+                                        $status = "La entrada se ha editado correctamente";
                                 } else{
-                                        $status = "Error al editar la categoría !!";
+                                        $status = "La entrada se ha editado mal";
                                 }
-                                
-                                
+                            
                         } else {
-                                $status = "La categoría no se ha editado porque el formulario no es válido";
+                                $status = "El formulario no es válido";
                         }
-
+                        
                         $this->session->getFlashBag()->add("status", $status);
-                        return $this->redirectToRoute("blog_index_category");
-                } 
+                        return $this->redirectToRoute("blog_homepage");
+                        
+                 }
                 
-                return $this->render("BlogBundle:Category:edit.html.twig", array(
-                                'form' => $form->createView()
+                return $this->render("BlogBundle:Entry:edit.html.twig", array(
+                                'form' => $form->createView(),
+                                'entry' => $entry
                         )
                 );
-                 
-        }*/
+                
+        }
         
         public function deleteAction($id){
             

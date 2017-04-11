@@ -33,7 +33,10 @@ class EntryType extends AbstractType
                                     "Privado" => "private"
                             ), "attr" => array( "class" => "form-control" )))
             ->add('image' , FileType::class, 
-                        array("label" => "Imagen" , "attr" => array("class" => "form-control")))
+                        array("label" => "Imagen" , 
+                                "attr" => array("class" => "form-control"),
+                                "data_class" => null
+                        ))
             ->add('category' , EntityType::class,  //se conectara a doctrine para sacar la data de categoria
                         array("label" => "Categorías" , "class" => "BlogBundle:Category", 
                                 "attr" => array( "class" => "form-control")))

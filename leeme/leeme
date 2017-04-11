@@ -219,4 +219,11 @@
 	CODEAR (funcion INDEX)
 	/opt/lampp/htdocs/symfony3/src/BlogBundle/Controller/EntryController.php
 
+--EDITAR ENTRADAS
+	-- $form->handleRequest($request);
+		Bindear, Unir, los datos que viajen por POST al formulario
 
+	-- Agregar lo siguiente, para que la imagen no exija un file:
+		/opt/lampp/htdocs/symfony3/src/BlogBundle/Form/EntryType.php
+		"data_class" => null
+	
