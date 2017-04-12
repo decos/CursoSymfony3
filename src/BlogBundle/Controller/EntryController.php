@@ -16,18 +16,28 @@ class EntryController extends Controller
             $this->session = new Session();
         }
 
-        public function indexAction(){
+        public function indexAction($page){
                 
                 $em  = $this->getDoctrine()->getEntityManager();
                 $entry_repo = $em->getRepository("BlogBundle:Entry");
-                $entries = $entry_repo->findAll();
+                //$entries = $entry_repo->findAll();
+                $pageSize=5;
+                $entries = $entry_repo->getPaginateEntries($pageSize, $page);
                 
                 $category_repo = $em->getRepository("BlogBundle:Category");
                 $categories = $category_repo->findAll();
                 
+                //--Para mostrar los links y evitar el uso de la URL
+                $totalItems = count($entries); //Total de elementos que vienen del paginador
+                $pagesCount = ceil($totalItems/$pageSize);  //Redondear el calculo de total items
+                
                 return $this->render("BlogBundle:Entry:index.html.twig", array(
                                 'entries' => $entries,
-                                'categories' => $categories
+                                'categories' => $categories,
+                                'totalItems' => $totalItems, 
+                                'pagesCount' => $pagesCount,
+                                "page" => $page,
+                                "page_m" => $page
                         )
                 );
                 
@@ -99,7 +109,7 @@ class EntryController extends Controller
                         }
 
                         $this->session->getFlashBag()->add("status", $status);
-                        return $this->redirectToRoute("blog_index_entry");
+                        return $this->redirectToRoute("blog_homepage");
                 } 
 
                 return $this->render("BlogBundle:Entry:add.html.twig", array(

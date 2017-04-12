@@ -5,6 +5,8 @@ namespace BlogBundle\Repository;
 use Doctrine\ORM\EntityRepository;
 use BlogBundle\Entity\Tag;
 use BlogBundle\Entity\EntryTag;
+//Paginador
+use Doctrine\ORM\Tools\Pagination\Paginator;
 
 class EntryRepository extends EntityRepository{
     
@@ -52,6 +54,20 @@ class EntryRepository extends EntityRepository{
                         $em->persist($entryTag);
                 }
                 $flush = $em->flush();
+                
+        }
+        
+        public function getPaginateEntries($pageSize=3, $currentPage=1){
+                $em = $this->getEntityManager();
+                
+                $dql = "SELECT e FROM BlogBundle\Entity\Entry e ORDER BY e.id DESC";
+                
+                $query = $em->createQuery($dql)
+                        ->setFirstResult($pageSize*($currentPage-1)) //Calculo de paginas para mostrarnos, Limitar el numero de resultados
+                        ->setMaxResults($pageSize); //Cantidad de resultados maximos que va mostrar
+                
+                $paginator = new Paginator($query, $fetchJoinCollection = true);
+                return $paginator;
                 
         }
     

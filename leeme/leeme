@@ -231,4 +231,26 @@
 
 --MOSTRAR ETIQUETAS DE LA EDICION DE LA ENTRADA
 	--Hacer un TRIM
-	
+		{%  set  tags_clean = tags | trim(",") %}
+            	{{form_widget(form.tags, { 'value': tags_clean })}}
+
+--PAGINACION DE LAS ENTRADAS
+	--Agregar al routing.yml
+	/opt/lampp/htdocs/symfony3/src/BlogBundle/Resources/config/routing.yml
+		blog_homepage
+
+	--Crear metodo getPaginateEntries
+	/opt/lampp/htdocs/symfony3/src/BlogBundle/Repository/EntryRepository.php
+
+	--Modificar lo siguiente
+	/opt/lampp/htdocs/symfony3/src/BlogBundle/Controller/EntryController.php
+		//$entries = $entry_repo->findAll();
+		$entries = $entry_repo->getPaginateEntries(5, $page);
+
+	--Para mostrar los links y evitar el uso de la URL
+	/opt/lampp/htdocs/symfony3/src/BlogBundle/Controller/EntryController.php
+		public function indexAction($page){
+	/opt/lampp/htdocs/symfony3/src/BlogBundle/Resources/views/Entry/index.html.twig
+		<ul class="pagination"> 
+		...
+		</ul>
