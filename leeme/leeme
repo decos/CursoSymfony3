@@ -226,4 +226,9 @@
 	-- Agregar lo siguiente, para que la imagen no exija un file:
 		/opt/lampp/htdocs/symfony3/src/BlogBundle/Form/EntryType.php
 		"data_class" => null
+
+	-- Para poder ver la imagen
+
+--MOSTRAR ETIQUETAS DE LA EDICION DE LA ENTRADA
+	--Hacer un TRIM
 	

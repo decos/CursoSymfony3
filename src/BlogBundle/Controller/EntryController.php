@@ -117,6 +117,12 @@ class EntryController extends Controller
                 $category_repo = $em->getRepository("BlogBundle:Category");
                 //$category = $category_repo->find($id);
                 
+                //OBTENER LOS TAGS DE LAS ENTRADAS
+                $tags = "";
+                foreach ($entry->getEntryTag() as $entryTag){
+                        $tags.=$entryTag->getTag()->getName(). ",";
+                }
+                
                 $form = $this->createForm(EntryType::class, $entry);
                 //Bindear, Unir, los datos que viajen por POST al formulario
                 $form->handleRequest($request);
@@ -152,6 +158,17 @@ class EntryController extends Controller
                                 $em->persist($entry);
                                 $flush = $em->flush();
                                 
+                                //Eliminar todas las relaciones entre ENTRADA y TAG
+                                $entry_tag_repo = $em->getRepository("BlogBundle:EntryTag");
+                                $entry_tags = $entry_tag_repo->findBy(array("entry" => $entry));
+                                foreach ($entry_tags as $et){
+                                        //if(is_object($et)){
+                                        $em->remove($et);
+                                        $em->flush();
+                                        //}
+                                }
+                                
+                                
                                 //Almacenar TAGS
                                 $entry_repo->saveEntryTags(
                                         $form->get("tags")->getData(),
@@ -178,7 +195,8 @@ class EntryController extends Controller
                 
                 return $this->render("BlogBundle:Entry:edit.html.twig", array(
                                 'form' => $form->createView(),
-                                'entry' => $entry
+                                'entry' => $entry,
+                                'tags' => $tags
                         )
                 );
                 

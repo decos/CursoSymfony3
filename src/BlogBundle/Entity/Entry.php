@@ -217,5 +217,10 @@ class Entry
         return $this->entry;
     }
     
+    
+    public function getEntryTag(){
+        return $this->entryTag;
+    }
+    
 }
 
