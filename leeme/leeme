@@ -255,4 +255,14 @@
 		...
 		</ul>
 
+//ENTRADAS CATEGORIZADAS
+
+//RUTAS Y CONTROL DE ACCESO	
+	--Configuracion
+	/opt/lampp/htdocs/symfony3/app/config/security.yml
+	    access_control:
+		- { path: ^/tags, roles: [ROLE_ADMIN, ROLE_USER] }
+		- { path: ^/categories, roles: ROLE_ADMIN }
+	
+
 	
