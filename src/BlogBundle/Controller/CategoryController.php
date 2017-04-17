@@ -120,4 +120,29 @@ class CategoryController extends Controller
                 return $this->redirectToRoute("blog_index_category");
         }
     
+        //ENTRADAS CATEGORIZADAS
+        public function categoryAction($id, $page){
+                $em = $this->getDoctrine()->getEntityManager();
+                $category_repo = $em->getRepository("BlogBundle:Category");
+                $category = $category_repo->find($id);
+                
+                $entry_repo = $em->getRepository("BlogBundle:Entry");
+                $entries = $entry_repo->getCategoryEntries($category, 5, $page);
+                
+                //--Para mostrar los links y evitar el uso de la URL
+                $totalItems = count($entries); //Total de elementos que vienen del paginador
+                $pagesCount = ceil($totalItems/5);  //Redondear el calculo de total items
+                
+                return $this->render("BlogBundle:Category:category.html.twig", array(
+                                'category' => $category,
+                                'categories' => $category_repo->findAll(),
+                                'entries' => $entries,
+                                'totalItems' => $totalItems, 
+                                'pagesCount' => $pagesCount,
+                                "page" => $page,
+                                "page_m" => $page
+                        )
+                );
+        }
+        
 }
