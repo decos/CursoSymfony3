@@ -16,8 +16,11 @@ class EntryController extends Controller
             $this->session = new Session();
         }
 
-        public function indexAction($page){
+        public function indexAction(Request $request, $page){
                 
+                var_dump($request->getSession()->get("_locale"));
+                var_dump($this->get("translator")->trans("btn_edit")); 
+            
                 $em  = $this->getDoctrine()->getEntityManager();
                 $entry_repo = $em->getRepository("BlogBundle:Entry");
                 //$entries = $entry_repo->findAll();
@@ -68,16 +71,19 @@ class EntryController extends Controller
                                 //UPLOAD FILE
                                 //Lo mismo: $form->get("image")->getData()
                                 $file = $form["image"]->getData(); 
-                                //obtener la extension
-                                $ext = $file->guessExtension();
-                                //asignar un nombre
-                                $file_name = time(). "." . $ext;
-                                //movemos a un directorio que se va llamar "uploads"
-                                //ese directorio se coloca dentro del directorio web del framework
-                                $file->move("uploads", $file_name);
-                                //setear base de datos con el mismo nombre
-                                $entry->setImage($file_name);
-                                
+                                if( !empty($file) && $file!= null ){
+                                        //obtener la extension
+                                        $ext = $file->guessExtension();
+                                        //asignar un nombre
+                                        $file_name = time(). "." . $ext;
+                                        //movemos a un directorio que se va llamar "uploads"
+                                        //ese directorio se coloca dentro del directorio web del framework
+                                        $file->move("uploads", $file_name);
+                                        //setear base de datos con el mismo nombre
+                                        $entry->setImage($file_name);
+                               } else{
+                                        $entry->setImage(null);
+                               }
                                 
                                 $category = $category_repo->find($form->get("category")->getData());
                                 $entry->setCategory($category);
@@ -127,6 +133,10 @@ class EntryController extends Controller
                 $category_repo = $em->getRepository("BlogBundle:Category");
                 //$category = $category_repo->find($id);
                 
+                //OBTENER LA IMAGEN QUE HABIA ANTES
+                $entry = $entry_repo->find($id);
+                $entry_image = $entry->getImage();
+                
                 //OBTENER LOS TAGS DE LAS ENTRADAS
                 $tags = "";
                 foreach ($entry->getEntryTag() as $entryTag){
@@ -139,23 +149,28 @@ class EntryController extends Controller
                 
                  if($form->isSubmitted()){
                         if($form->isValid()){
-                                
+                                /*
                                 $entry->setTitle($form->get("title")->getData());
                                 $entry->setStatus($form->get("status")->getData());
                                 $entry->setContent($form->get("content")->getData());
+                                */
                                 
                                 //UPLOAD FILE
                                 //Lo mismo: $form->get("image")->getData()
-                                $file = $form["image"]->getData(); 
-                                //obtener la extension
-                                $ext = $file->guessExtension();
-                                //asignar un nombre
-                                $file_name = time(). "." . $ext;
-                                //movemos a un directorio que se va llamar "uploads"
-                                //ese directorio se coloca dentro del directorio web del framework
-                                $file->move("uploads", $file_name);
-                                //setear base de datos con el mismo nombre
-                                $entry->setImage($file_name);
+                                $file = $form["image"]->getData();
+                                        if( !empty($file) && $file!= null ){
+                                        //obtener la extension
+                                        $ext = $file->guessExtension();
+                                        //asignar un nombre
+                                        $file_name = time(). "." . $ext;
+                                        //movemos a un directorio que se va llamar "uploads"
+                                        //ese directorio se coloca dentro del directorio web del framework
+                                        $file->move("uploads", $file_name);
+                                        //setear base de datos con el mismo nombre
+                                        $entry->setImage($file_name);
+                                } else{
+                                        $entry->setImage($entry_image);
+                                }
                                 
                                 
                                 $category = $category_repo->find($form->get("category")->getData());

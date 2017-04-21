@@ -35,7 +35,8 @@ class EntryType extends AbstractType
             ->add('image' , FileType::class, 
                         array("label" => "Imagen" , 
                                 "attr" => array("class" => "form-control"),
-                                "data_class" => null
+                                "data_class" => null,
+                                "required" => false
                         ))
             ->add('category' , EntityType::class,  //se conectara a doctrine para sacar la data de categoria
                         array("label" => "Categorías" , "class" => "BlogBundle:Category", 

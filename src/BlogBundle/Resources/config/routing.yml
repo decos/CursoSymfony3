@@ -60,3 +60,7 @@ blog_edit_entry:
 blog_delete_entry:
     path: /entries/delete/{id}
     defaults: { _controller: BlogBundle:Entry:delete }
+    
+blog_lang:
+    path: /lang/{_locale}
+    defaults: { _controller: BlogBundle:Default:lang }

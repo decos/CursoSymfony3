@@ -255,14 +255,33 @@
 		...
 		</ul>
 
-//ENTRADAS CATEGORIZADAS
+--ENTRADAS CATEGORIZADAS
 
-//RUTAS Y CONTROL DE ACCESO	
+--RUTAS Y CONTROL DE ACCESO	
 	--Configuracion
 	/opt/lampp/htdocs/symfony3/app/config/security.yml
 	    access_control:
 		- { path: ^/tags, roles: [ROLE_ADMIN, ROLE_USER] }
 		- { path: ^/categories, roles: ROLE_ADMIN }
 	
-
+--IMAGEN NO OBLIGATORIA
 	
+	--Modificar
+	/opt/lampp/htdocs/symfony3/src/BlogBundle/Form/EntryType.php
+	funcion add y edit
+	/opt/lampp/htdocs/symfony3/src/BlogBundle/Controller/EntryController.php
+
+--INTERNACIONALIZACION
+	1.- Crear en la raiz del BUNDLE un directorio llamado EventListener
+	2.- Crear clase LocaleListener.php
+	3.- Crear servicio locale_listener
+		/opt/lampp/htdocs/symfony3/app/config/services.yml
+	4.- Crear la funcion langAction 
+		/opt/lampp/htdocs/symfony3/src/BlogBundle/Controller/DefaultController.php
+	5.- Agregar la ruta blog_lang
+		/opt/lampp/htdocs/symfony3/src/BlogBundle/Resources/config/routing.yml
+	6.- Crear directorio Translations en la raíz de "app"
+		/opt/lampp/htdocs/symfony3/app/Resources/Translations/messages.es.yml
+		/opt/lampp/htdocs/symfony3/app/Resources/Translations/messages.en.yml
+	7.- Descomentar "translator"
+		/opt/lampp/htdocs/symfony3/app/config/config.yml
